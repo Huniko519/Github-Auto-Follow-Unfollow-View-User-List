@@ -7,6 +7,7 @@ async function run() {
   try {
     const token = core.getInput('token');
     const username = core.getInput('username');
+    const repository = core.getInput('repository');
     const octokit = new Octokit({ auth: `token ${token}` });
 
     async function queryFollowers(page = 1) {
@@ -130,7 +131,7 @@ async function run() {
     const end = `## LICENSE
 Copyright (c) 2023-present [Huniko519](https://github.com/Huniko519)
 `;
-    writeFileSync("./README.md", before + middle + end);
+    writeFileSync(`${repository}/README.md`, before + middle + end);
     console.log("Done!");
   } catch (error) {
     console.log(error.message);
