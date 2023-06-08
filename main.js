@@ -2,12 +2,13 @@ require("dotenv").config();
 const { Octokit } = require("@octokit/rest");
 const github = require("@actions/github");
 const { writeFileSync } = require("fs");
+const core = require("@actions/core");
 
 async function run() {
   try {
-    const { token } = process.env;
+    const token = core.getInput('token');
     const octokit = new Octokit({ auth: `token ${token}` });
-    const username = github.context.repo.owner;
+    const username = core.getInput('username');
 
     async function queryFollowers(page = 1) {
       let { data: followers } = await octokit.users.listFollowersForUser({
