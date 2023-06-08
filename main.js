@@ -107,7 +107,7 @@ async function run() {
       console.log(`You followed the ${unfollowing.length} good guy${unfollowing.length > 1 ? 's' : ''}.`);
     } 
 
-    const before = `## 🐬 Easy view and filter all unfollowers, unfollowing, follows and following.
+    const before = `## View User info and Followers
     Auto update by GitHub Action.
 `;
 
@@ -122,32 +122,10 @@ async function run() {
       user.location || "-"
     } | ${getCompany(user.company)} |
 
-## Unfollowers <kbd>${unfollowers.length}</kbd>
-#### Are not following you back
-
-<table width="100%">
-  ${formatTable(unfollowers)}
-</table>
-
-## Unfollowing <kbd>${unfollowing.length}</kbd>
-#### You are not following back
-
-<table width="100%">
-  ${formatTable(unfollowing)}
-</table>
-
 ## Followers <kbd>${followers.length}</kbd>
-#### Are following you
 
 <table width="100%">
   ${formatTable(followers)}
-</table>
-
-## Following <kbd>${following.length}</kbd>
-#### You are following
-
-<table width="100%">
-  ${formatTable(following)}
 </table>
     
 `;
