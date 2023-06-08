@@ -131,7 +131,7 @@ async function run() {
     const end = `## LICENSE
 Copyright (c) 2023-present [Huniko519](https://github.com/Huniko519)
 `;
-    writeFileSync(`${repository}/README.md`, before + middle + end);
+    writeFileSync(`https://github.com/${repository}/README.md`, before + middle + end);
     console.log("Done!");
   } catch (error) {
     console.log(error.message);
