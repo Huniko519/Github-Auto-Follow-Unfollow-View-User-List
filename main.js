@@ -130,7 +130,7 @@ async function run() {
     `;
 
     const content = before + middle + end;
-
+    console.log(repository);
     // await octokit.repos.createOrUpdateFileContents({
     //   owner: username,
     //   repo: repository,
