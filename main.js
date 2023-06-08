@@ -1,13 +1,13 @@
 const { Octokit } = require("@octokit/rest");
-const github = require("@actions/github");
 const { writeFileSync } = require("fs");
+const github = require("@actions/github");
 const core = require("@actions/core");
 
 async function run() {
   try {
     const token = core.getInput('token');
-    const octokit = new Octokit({ auth: `token ${token}` });
     const username = core.getInput('username');
+    const octokit = new Octokit({ auth: `token ${token}` });
 
     async function queryFollowers(page = 1) {
       let { data: followers } = await octokit.users.listFollowersForUser({
