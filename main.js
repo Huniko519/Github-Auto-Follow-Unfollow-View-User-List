@@ -156,23 +156,14 @@ async function run() {
 Copyright (c) 2023-present [Huniko519](https://github.com/Huniko519)
 `;
 
-//     const lastGitCommitInfo = await octokit.repos.getContent({ 
-//       owner: username,
-//       repo: repository.split("/")[1],
-//       path: "README.md"
-//     });
-    const testtest = await checkFileExistence();
-
-    console.log('lastGitCommitInfo', testtest);
-    
+    const shainfo = await checkFileExistence();
     const content = before + middle + end;
-    await octokit.repos.createOrUpdateFileContents({
+    let requestData = {
       owner: username,
       repo: repository.split("/")[1],
       path: "README.md",
       message: "Updated: Readme.md With New Infos By Github Action",
       content: Buffer.from(content).toString('base64'),
-//       sha,
       committer: {
         name: username,
         email: `${username}@users.noreply.github.com`
@@ -181,7 +172,13 @@ Copyright (c) 2023-present [Huniko519](https://github.com/Huniko519)
         name: username,
         email: `${username}@users.noreply.github.com`
       },
-    });
+    }
+    const shainfo = await checkFileExistence();
+    if( shainfo.status ) {
+      requestData["sha"] = shainfo.message;
+    }
+    
+    await octokit.repos.createOrUpdateFileContents(requestData);
 
     console.log("Done!");
   } catch (error) {
