@@ -6,12 +6,12 @@ inputs:
   token:
     description: 'The token used to authenticate.'
     required: true
-    default: ${{ github.token }}
+    default: ${{ secret.token }}
 
   username:
     description: 'The base user name.'
     required: true
-    default: ${{ github.username }}
+    default: ${{ secret.username }}
 
 runs:
   using: 'node16'
