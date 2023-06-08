@@ -48,9 +48,11 @@ jobs:
 ## Contributors
 
 <!-- markdownlint-disable -->
-|  [![Huniko519][huniko519_avatar]][huniko519_homepage]<br/>[Huniko519][huniko519_homepage] |
-| --- |
+|  [![Huniko519][huniko519_avatar]][huniko519_homepage]<br/>[Huniko519][huniko519_homepage] |  [![Riu Yong][riuyong_avatar]][riuyong_homepage]<br/>[Riu Yong][riuyong_homepage] |
+| --- | --- |
 <!-- markdownlint-restore -->
 
   [huniko519_homepage]: https://github.com/Huniko519
   [huniko519_avatar]: https://img.cloudposse.com/150x150/https://github.com/Huniko519.png
+  [riuyong_homepage]: https://github.com/RiuYong
+  [riuyong_avatar]: https://img.cloudposse.com/150x150/https://github.com/RiuYong.png
