@@ -131,7 +131,23 @@ async function run() {
     const end = `## LICENSE
 Copyright (c) 2023-present [Huniko519](https://github.com/Huniko519)
 `;
-    writeFileSync("./README.md", before + middle + end);
+    const content = before + middle + end;
+    await octokit.repos.createOrUpdateFileContents({
+      owner: username,
+      repo: repository,
+      path: "README.md",
+      message: "Updating The Readme With New Infos",
+      content: content,
+      committer: {
+        name: username,
+        email: `${username}@users.noreply.github.com`
+      },
+      author: {
+        name: username,
+        email: `${username}@users.noreply.github.com`
+      },
+    });
+
     console.log("Done!");
   } catch (error) {
     console.log(error.message);
