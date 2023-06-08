@@ -75,11 +75,7 @@ async function run() {
       console.log(`You followed the ${unfollowing.length} good guy${unfollowing.length > 1 ? 's' : ''}.`);
     } 
 
-    const before = `# 🐬 Easy view and filter all unfollowers, unfollowing, follows and following. Auto update by GitHub Action.
-
-- Since GitHub's default follows and following does not support paging and filtering
-
-`;
+    const before = `## 🐬 Easy view and filter all unfollowers, unfollowing, follows and following. Auto update by GitHub Action.`;
 
     function dealBlog(blog) {
       if (blog) {
@@ -88,7 +84,7 @@ async function run() {
       return "-";
     }
 
-    const middle = `## ${username}
+    const part1 = `## ${username}
 
 <img src="${user.avatar_url}" width="150" />
 
