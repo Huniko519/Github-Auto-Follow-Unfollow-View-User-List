@@ -76,8 +76,10 @@ async function run() {
     } 
 
     const before = `# 🐬 Easy view and filter all unfollowers, unfollowing, follows and following. Auto update by GitHub Action.
-      - Since GitHub's default follows and following does not support paging and filtering
-    `;
+
+- Since GitHub's default follows and following does not support paging and filtering
+
+`;
 
     function dealBlog(blog) {
       if (blog) {
@@ -87,47 +89,48 @@ async function run() {
     }
 
     const middle = `## ${username}
-      <img src="${user.avatar_url}" width="150" />
 
-      | Name | Bio | Blog | Location | Company |
-      | -- | -- | -- | -- | -- |
-      | ${user.name || "-"} | ${user.bio || "-"} | ${dealBlog(user.blog)} | ${
-            user.location || "-"
-          } | ${getCompany(user.company)} |
+<img src="${user.avatar_url}" width="150" />
 
-      ## Unfollowers <kbd>${unfollowers.length}</kbd>
-      #### Are not following you back
+| Name | Bio | Blog | Location | Company |
+| -- | -- | -- | -- | -- |
+| ${user.name || "-"} | ${user.bio || "-"} | ${dealBlog(user.blog)} | ${
+      user.location || "-"
+    } | ${getCompany(user.company)} |
 
-      <table width="100%">
-        ${formatTable(unfollowers)}
-      </table>
+## Unfollowers <kbd>${unfollowers.length}</kbd>
+#### Are not following you back
 
-      ## Unfollowing <kbd>${unfollowing.length}</kbd>
-      #### You are not following back
+<table width="100%">
+  ${formatTable(unfollowers)}
+</table>
 
-      <table width="100%">
-        ${formatTable(unfollowing)}
-      </table>
+## Unfollowing <kbd>${unfollowing.length}</kbd>
+#### You are not following back
 
-      ## Followers <kbd>${followers.length}</kbd>
-      #### Are following you
+<table width="100%">
+  ${formatTable(unfollowing)}
+</table>
 
-      <table width="100%">
-        ${formatTable(followers)}
-      </table>
+## Followers <kbd>${followers.length}</kbd>
+#### Are following you
 
-      ## Following <kbd>${following.length}</kbd>
-      #### You are following
+<table width="100%">
+  ${formatTable(followers)}
+</table>
 
-      <table width="100%">
-        ${formatTable(following)}
-      </table>
+## Following <kbd>${following.length}</kbd>
+#### You are following
+
+<table width="100%">
+  ${formatTable(following)}
+</table>
     
-    `;
+`;
 
     const end = `## LICENSE
-      Copyright (c) 2023-present [Huniko519](https://github.com/Huniko519)
-    `;
+Copyright (c) 2023-present [Huniko519](https://github.com/Huniko519)
+`;
 
     const content = before + middle + end;
     
