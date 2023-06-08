@@ -6,14 +6,6 @@ GitHub Action automatically creates or updates Readme with an overview.
 
 💡 Auto follow, unfollow, update user list(unfollow, unfollowing, follower, following) by Cron JOB ( every 8 hours )
 
-## Inputs
-
-| inputs                   | required | default               | description |
-|--------------------------|----------|-----------------------|-------------|
-| `token`           	     | true     | `${{ github.token }}` | The token used to authenticate. |
-| `username`               | true     | `${{ github.actor }}` | The base user name. |
-| `repository`             | true     | `${{ github.repository }}` | The name of the repository. |
-
 ## Example
 
 ```yaml
@@ -35,3 +27,18 @@ jobs:
           username: ${{ github.actor }}
           repository: ${{ github.repository }}
 ```
+
+## Inputs
+
+| inputs                   | required | default               | description |
+|--------------------------|----------|-----------------------|-------------|
+| `token`           	     | true     | `${{ github.token }}` | The token used to authenticate. |
+| `username`               | true     | `${{ github.actor }}` | The base user name. |
+| `repository`             | true     | `${{ github.repository }}` | The name of the repository. |
+
+## Input of this action
+
+- input:
+  - `token`: [GitHub personal access token](https://github.com/settings/tokens/new) with at least **'read:user' and 'repo'** scope. _⚠️ You should store this token as [secret](#secrets)._ This input is required.
+  - `username`: This is username of github. This input is required.
+  - `repository`: This is name of installed repository. This input is required.
