@@ -75,7 +75,9 @@ async function run() {
       console.log(`You followed the ${unfollowing.length} good guy${unfollowing.length > 1 ? 's' : ''}.`);
     } 
 
-    const before = `## 🐬 Easy view and filter all unfollowers, unfollowing, follows and following. Auto update by GitHub Action.`;
+    const before = `## 🐬 Easy view and filter all unfollowers, unfollowing, follows and following.
+    Auto update by GitHub Action.
+`;
 
     function dealBlog(blog) {
       if (blog) {
