@@ -16,7 +16,7 @@ name: Github-Auto-Follow-Unfollow-View-User-List
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 */3 * * *'
+    - cron: '0 */8 * * 1-5'
 
 jobs:
   auto-update:
