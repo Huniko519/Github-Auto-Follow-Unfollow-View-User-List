@@ -1,6 +1,7 @@
-# Github-Auto-Follow-Unfollow-View-User-List
+# Auto Follow && Unfollower by Github Actions for Github users
 
-GitHub Action automatically creates or updates Readme with an overview.
+A feature that unfollows all non-followers of the owner and a feature that follows back those who were not being followed by the owner
+GitHub Action automatically creates or updates Readme with users(unfollowers, unfollowing, followers, followings) list and current user information.
 
 ## Usage
 
