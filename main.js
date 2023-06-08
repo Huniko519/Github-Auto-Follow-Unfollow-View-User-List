@@ -69,16 +69,25 @@ async function run() {
     
     async function checkFileExistence() {
       try {
-        const lastGitCommitInfo = await octokit.repos.getReadme({
+        const { data: { sha }} = await octokit.repos.getReadme({
           owner: username,
           repo: repository.split("/")[1],
         });
-        console.log("File exists!");
+        return {
+          status: true,
+          message: sha
+        };
       } catch (error) {
         if (error.status === 404) {
-          console.log("File does not exist.");
+          return {
+            status: false,
+            message: "File does not exist."
+          };
         } else {
-          console.error(error);
+          return {
+            status: false,
+            message: error
+          };
         }
       }
     }
@@ -152,8 +161,9 @@ Copyright (c) 2023-present [Huniko519](https://github.com/Huniko519)
 //       repo: repository.split("/")[1],
 //       path: "README.md"
 //     });
+    const followers = await checkFileExistence();
 
-    console.log('lastGitCommitInfo', checkFileExistence());
+    console.log('lastGitCommitInfo', followers);
     
     const content = before + middle + end;
     await octokit.repos.createOrUpdateFileContents({
