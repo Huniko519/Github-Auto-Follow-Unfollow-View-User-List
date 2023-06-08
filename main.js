@@ -132,15 +132,13 @@ async function run() {
 Copyright (c) 2023-present [Huniko519](https://github.com/Huniko519)
 `;
 
-    const content = before + middle + end;
-    
-    //fetching latest commit info for the branch
     const { data: { sha } } = await octokit.repos.getContent({ 
       owner: username,
       repo: repository.split("/")[1],
       path: "README.md"
     });
 
+    const content = before + middle + end;
     await octokit.repos.createOrUpdateFileContents({
       owner: username,
       repo: repository.split("/")[1],
