@@ -1,0 +1,22 @@
+name: 'Auto follow/unfollow/view for gitHub users, GitHub Actions workflow runs'
+description: 'Workflow Runs for auto follow/unfollow/view Actions for github users.'
+author: 'JuvenileQ'
+
+inputs:
+  token:
+    description: 'The token used to authenticate.'
+    required: true
+    default: ${{ github.token }}
+
+  username:
+    description: 'The base user name.'
+    required: true
+    default: ${{ github.username }}
+
+runs:
+  using: 'node16'
+  main: 'main.js'
+
+branding:
+  icon: 'auto'
+  color: 'green'
