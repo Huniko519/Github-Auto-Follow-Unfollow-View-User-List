@@ -6,7 +6,7 @@ inputs:
   token:
     description: 'The token used to authenticate.'
     required: true
-    default: ${{ github.token }}
+    default: ${{ secrets.TOKEN }}
 
   username:
     description: 'The base user name.'
