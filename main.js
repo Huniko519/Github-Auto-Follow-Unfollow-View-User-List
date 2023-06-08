@@ -143,7 +143,7 @@ Copyright (c) 2023-present [Huniko519](https://github.com/Huniko519)
       owner: username,
       repo: repository.split("/")[1],
       path: "README.md",
-      message: "Updating The Readme With New Infos",
+      message: "Updated: Readme.md With New Infos By Github Action",
       content: Buffer.from(content).toString('base64'),
       sha,
       committer: {
