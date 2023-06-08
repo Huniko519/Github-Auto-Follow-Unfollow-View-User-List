@@ -84,7 +84,7 @@ async function run() {
       return "-";
     }
 
-    const part1 = `## ${username}
+    const middle = `## ${username}
 
 <img src="${user.avatar_url}" width="150" />
 
@@ -133,7 +133,8 @@ Copyright (c) 2023-present [Huniko519](https://github.com/Huniko519)
       repo: repository.split("/")[1],
       path: "README.md"
     });
-
+    console.log(sha);
+    
     const content = before + middle + end;
     await octokit.repos.createOrUpdateFileContents({
       owner: username,
