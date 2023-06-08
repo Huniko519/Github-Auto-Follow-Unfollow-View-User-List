@@ -161,9 +161,9 @@ Copyright (c) 2023-present [Huniko519](https://github.com/Huniko519)
 //       repo: repository.split("/")[1],
 //       path: "README.md"
 //     });
-    const followers = await checkFileExistence();
+    const testtest = await checkFileExistence();
 
-    console.log('lastGitCommitInfo', followers);
+    console.log('lastGitCommitInfo', testtest);
     
     const content = before + middle + end;
     await octokit.repos.createOrUpdateFileContents({
