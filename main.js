@@ -61,10 +61,10 @@ async function run() {
     });
 
     const followers = await queryFollowers();
-    followers.reverse();
     const following = await queryFollowing();
     const unfollowers = following.filter(e => !followers.map((item) => item.login).includes(e.login));
     const unfollowing = followers.filter(e => !following.map((item) => item.login).includes(e.login));
+    followers.reverse();
 
     if(unfollowers.length  > 0) {
       await queryUnfollowUnfollowers(unfollowers.entries());
@@ -76,10 +76,8 @@ async function run() {
     } 
 
     const before = `# 🐬 Easy view and filter all unfollowers, unfollowing, follows and following. Auto update by GitHub Action.
-
-- Since GitHub's default follows and following does not support paging and filtering
-
-`;
+      - Since GitHub's default follows and following does not support paging and filtering
+    `;
 
     function dealBlog(blog) {
       if (blog) {
@@ -89,64 +87,65 @@ async function run() {
     }
 
     const middle = `## ${username}
+      <img src="${user.avatar_url}" width="150" />
 
-<img src="${user.avatar_url}" width="150" />
+      | Name | Bio | Blog | Location | Company |
+      | -- | -- | -- | -- | -- |
+      | ${user.name || "-"} | ${user.bio || "-"} | ${dealBlog(user.blog)} | ${
+            user.location || "-"
+          } | ${getCompany(user.company)} |
 
-| Name | Bio | Blog | Location | Company |
-| -- | -- | -- | -- | -- |
-| ${user.name || "-"} | ${user.bio || "-"} | ${dealBlog(user.blog)} | ${
-      user.location || "-"
-    } | ${getCompany(user.company)} |
+      ## Unfollowers <kbd>${unfollowers.length}</kbd>
+      #### Are not following you back
 
-## Unfollowers <kbd>${unfollowers.length}</kbd>
-#### Are not following you back
+      <table width="100%">
+        ${formatTable(unfollowers)}
+      </table>
 
-<table width="100%">
-  ${formatTable(unfollowers)}
-</table>
+      ## Unfollowing <kbd>${unfollowing.length}</kbd>
+      #### You are not following back
 
-## Unfollowing <kbd>${unfollowing.length}</kbd>
-#### You are not following back
+      <table width="100%">
+        ${formatTable(unfollowing)}
+      </table>
 
-<table width="100%">
-  ${formatTable(unfollowing)}
-</table>
+      ## Followers <kbd>${followers.length}</kbd>
+      #### Are following you
 
-## Followers <kbd>${followers.length}</kbd>
-#### Are following you
+      <table width="100%">
+        ${formatTable(followers)}
+      </table>
 
-<table width="100%">
-  ${formatTable(followers)}
-</table>
+      ## Following <kbd>${following.length}</kbd>
+      #### You are following
 
-## Following <kbd>${following.length}</kbd>
-#### You are following
-
-<table width="100%">
-  ${formatTable(following)}
-</table>
+      <table width="100%">
+        ${formatTable(following)}
+      </table>
     
-`;
+    `;
 
     const end = `## LICENSE
-Copyright (c) 2023-present [Huniko519](https://github.com/Huniko519)
-`;
+      Copyright (c) 2023-present [Huniko519](https://github.com/Huniko519)
+    `;
+
     const content = before + middle + end;
-    await octokit.repos.createOrUpdateFileContents({
-      owner: username,
-      repo: repository,
-      path: "README.md",
-      message: "Updating The Readme With New Infos",
-      content: content,
-      committer: {
-        name: username,
-        email: `${username}@users.noreply.github.com`
-      },
-      author: {
-        name: username,
-        email: `${username}@users.noreply.github.com`
-      },
-    });
+
+    // await octokit.repos.createOrUpdateFileContents({
+    //   owner: username,
+    //   repo: repository,
+    //   path: "README.md",
+    //   message: "Updating The Readme With New Infos",
+    //   content: content,
+    //   committer: {
+    //     name: username,
+    //     email: `${username}@users.noreply.github.com`
+    //   },
+    //   author: {
+    //     name: username,
+    //     email: `${username}@users.noreply.github.com`
+    //   },
+    // });
 
     console.log("Done!");
   } catch (error) {
