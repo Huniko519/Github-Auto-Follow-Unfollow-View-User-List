@@ -128,12 +128,12 @@ async function run() {
 Copyright (c) 2023-present [Huniko519](https://github.com/Huniko519)
 `;
 
-    const { data: { sha } } = await octokit.repos.getContent({ 
-      owner: username,
-      repo: repository.split("/")[1],
-      path: "README.md"
-    });
-    console.log(sha);
+//     const { data: { sha } } = await octokit.repos.getContent({ 
+//       owner: username,
+//       repo: repository.split("/")[1],
+//       path: "README.md"
+//     });
+//     console.log(sha);
     
     const content = before + middle + end;
     await octokit.repos.createOrUpdateFileContents({
