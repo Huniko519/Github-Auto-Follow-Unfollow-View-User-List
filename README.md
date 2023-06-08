@@ -4,7 +4,9 @@ GitHub Action automatically creates or updates Readme with an overview.
 
 ## Usage
 
-💡 Auto follow, unfollow, update user list(unfollow, unfollowing, follower, following) by Cron JOB ( every 8 hours )
+The purpose of this program is to generate an updated README file for any user's repository, displaying details about their account's followers, following, unfollowers and unfollowing, including their avatar urls, blog links, bio, location, and company, along with a table containing their usernames. 
+
+The program also implements two functions to perform actions on the GitHub API: a feature that unfollows all non-followers of the owner and a feature that follows back those who were not being followed by the owner.
 
 ## Example
 
