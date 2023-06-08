@@ -18,5 +18,5 @@ runs:
   main: 'main.js'
 
 branding:
-  icon: 'auto'
+  icon: 'check-square'
   color: 'green'
