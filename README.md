@@ -44,3 +44,13 @@ jobs:
   - `token`: [GitHub personal access token](https://github.com/settings/tokens/new) with at least **'read:user' and 'repo'** scope. _⚠️ You should store this token as [secret](#secrets)._ This input is required.
   - `username`: This is username of github. This input is required.
   - `repository`: This is name of installed repository. This input is required.
+
+## Contributors
+
+<!-- markdownlint-disable -->
+|  [![Huniko519][huniko519_avatar]][huniko519_homepage]<br/>[Huniko519][huniko519_homepage] |
+| --- |
+<!-- markdownlint-restore -->
+
+  [huniko519_homepage]: https://github.com/Huniko519
+  [huniko519_avatar]: https://img.cloudposse.com/150x150/https://github.com/Huniko519.png
