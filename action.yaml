@@ -1,5 +1,5 @@
-name: 'Auto follow/unfollow/view for gitHub users, GitHub Actions workflow runs'
-description: 'Workflow Runs for auto follow/unfollow/view Actions for github users.'
+name: 'Github-Auto-Follow-Unfollow-View-User-List'
+description: '💡 Auto follow, unfollow, update user list(unfollow, unfollowing, follower, following) by Cron JOB ( every 8 hours )'
 author: 'Huniko519'
 
 inputs:
