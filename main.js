@@ -156,7 +156,6 @@ async function run() {
 Copyright (c) 2023-present [Huniko519](https://github.com/Huniko519)
 `;
 
-    const shainfo = await checkFileExistence();
     const content = before + middle + end;
     let requestData = {
       owner: username,
