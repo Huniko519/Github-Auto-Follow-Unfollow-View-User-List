@@ -1,12 +1,11 @@
-# Auto Follows & Unfollows by Github Actions for Github users
+# Auto Follows & Unfollows by GitHub Actions for GitHub users
 
 A feature that unfollows all non-followers of the owner and a feature that follows back those who were not being followed by the owner.
-GitHub Action automatically creates or updates Readme with users(unfollowers, unfollowing, followers, followings) list and current user information.
+GitHub Action automatically creates or updates README with information of owner and followers.
 
 ## Usage
 
-The purpose of this program is to generate an updated README file for any user's repository, displaying details about their account's followers, following, unfollowers and unfollowing and current users's info. 
-
+The purpose of this program is to generate an updated README file for any user's repository, displaying details about their account's followers and current user's info. 
 The program also implements two functions to perform actions on the GitHub API: a feature that unfollows all non-followers of the owner and a feature that follows back those who were not being followed by the owner.
 
 ## Example
