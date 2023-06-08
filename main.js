@@ -131,21 +131,21 @@ async function run() {
 
     const content = before + middle + end;
     console.log(repository);
-    // await octokit.repos.createOrUpdateFileContents({
-    //   owner: username,
-    //   repo: repository,
-    //   path: "README.md",
-    //   message: "Updating The Readme With New Infos",
-    //   content: content,
-    //   committer: {
-    //     name: username,
-    //     email: `${username}@users.noreply.github.com`
-    //   },
-    //   author: {
-    //     name: username,
-    //     email: `${username}@users.noreply.github.com`
-    //   },
-    // });
+    await octokit.repos.createOrUpdateFileContents({
+      owner: username,
+      repo: repository.split("/")[1],
+      path: "README.md",
+      message: "Updating The Readme With New Infos",
+      content: content,
+      committer: {
+        name: username,
+        email: `${username}@users.noreply.github.com`
+      },
+      author: {
+        name: username,
+        email: `${username}@users.noreply.github.com`
+      },
+    });
 
     console.log("Done!");
   } catch (error) {
