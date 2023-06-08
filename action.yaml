@@ -13,6 +13,11 @@ inputs:
     required: true
     default: ${{ github.username }}
 
+  repository:
+    description: 'The name of the repository.'
+    required: true
+    default: ${{ github.repository }}
+    
 runs:
   using: 'node16'
   main: 'main.js'
