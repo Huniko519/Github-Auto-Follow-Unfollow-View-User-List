@@ -1,0 +1,28 @@
+
+  "name": "Github-Auto-Follow-Unfollow-View-User-List",
+  "version": "1.0.0",
+  "description": "The GitHub action to workflow runs for auto follow/unfollow/view users",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Huniko519/Github-Auto-Follow-Unfollow-View-User-List.git"
+  },
+  "keywords": [
+    "workflow runs",
+    "Actions",
+    "auto follow/unfollow/view workflow runs"
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Huniko519/Github-Auto-Follow-Unfollow-View-User-List/issues"
+  },
+  "homepage": "https://github.com/Huniko519/Github-Auto-Follow-Unfollow-View-User-List#readme",
+  "dependencies": {
+    "@actions/github": "^4.0.0",
+    "@octokit/rest": "^18.2.0",
+  }
+}
