@@ -1,4 +1,4 @@
-name: 'Auto Follow && Unfollower by Github Actions for Github users'
+name: 'Github-Auto-Follow-Unfollow-View-User-List'
 description: 'GitHub Action automatically creates or updates Readme with users(unfollowers, unfollowing, followers, followings) list and current user information.'
 author: 'Huniko519'
 
