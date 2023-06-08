@@ -130,6 +130,7 @@ async function run() {
     `;
 
     const content = before + middle + end;
+    
     //fetching latest commit info for the branch
     const { data: { sha } } = await octokit.repos.getContent({ 
       owner: username,
@@ -143,7 +144,7 @@ async function run() {
       path: "README.md",
       message: "Updating The Readme With New Infos",
       content: Buffer.from(content).toString('base64'),
-      sha: 
+      sha,
       committer: {
         name: username,
         email: `${username}@users.noreply.github.com`
