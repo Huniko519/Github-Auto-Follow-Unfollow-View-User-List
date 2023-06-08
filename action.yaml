@@ -1,4 +1,4 @@
-name: 'Github-Auto-Follow-Unfollow-View-User-List'
+name: 'Auto Follows & Unfollows by Github Actions for Github users'
 description: 'Features unfollow all non-followers of the owner and follow back those who the owner was not following.'
 author: 'Huniko519'
 
