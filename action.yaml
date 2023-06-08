@@ -1,5 +1,5 @@
-name: 'Github Auto Follow Unfollow View User List'
-description: '💡 Auto follow, unfollow, update user list(unfollow, unfollowing, follower, following) by Cron JOB ( every 8 hours )'
+name: 'Auto Follow && Unfollower by Github Actions for Github users'
+description: 'GitHub Action automatically creates or updates Readme with users(unfollowers, unfollowing, followers, followings) list and current user information.'
 author: 'Huniko519'
 
 inputs:
