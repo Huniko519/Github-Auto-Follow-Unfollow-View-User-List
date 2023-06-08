@@ -1,4 +1,3 @@
-require("dotenv").config();
 const { Octokit } = require("@octokit/rest");
 const github = require("@actions/github");
 const { writeFileSync } = require("fs");
