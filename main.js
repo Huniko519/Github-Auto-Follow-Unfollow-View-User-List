@@ -142,7 +142,7 @@ Copyright (c) 2023-present [Huniko519](https://github.com/Huniko519)
       path: "README.md",
       message: "Updated: Readme.md With New Infos By Github Action",
       content: Buffer.from(content).toString('base64'),
-      sha,
+//       sha,
       committer: {
         name: username,
         email: `${username}@users.noreply.github.com`
