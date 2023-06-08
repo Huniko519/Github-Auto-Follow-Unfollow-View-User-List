@@ -136,7 +136,7 @@ async function run() {
       repo: repository.split("/")[1],
       path: "README.md",
       message: "Updating The Readme With New Infos",
-      content: content,
+      content: Buffer.from(content).toString('base64'),
       committer: {
         name: username,
         email: `${username}@users.noreply.github.com`
