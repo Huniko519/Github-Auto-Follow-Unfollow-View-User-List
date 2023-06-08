@@ -127,12 +127,15 @@ async function run() {
     const end = `## LICENSE
 Copyright (c) 2023-present [Huniko519](https://github.com/Huniko519)
 `;
-
-    const lastGitCommitInfo = await octokit.repos.getContent({ 
+    const lastGitCommitInfo = await octokit.rest.repos.get({
       owner: username,
       repo: repository.split("/")[1],
-      path: "README.md"
     });
+//     const lastGitCommitInfo = await octokit.repos.getContent({ 
+//       owner: username,
+//       repo: repository.split("/")[1],
+//       path: "README.md"
+//     });
     console.log('lastGitCommitInfo', lastGitCommitInfo);
     
     const content = before + middle + end;
