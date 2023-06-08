@@ -60,6 +60,29 @@ async function run() {
       username,
     });
 
+    function dealBlog(blog) {
+      if (blog) {
+        return `[${blog}](https://${blog})`;
+      }
+      return "-";
+    }
+    
+    async function checkFileExistence() {
+      try {
+        const lastGitCommitInfo = await octokit.repos.getReadme({
+          owner: username,
+          repo: repository.split("/")[1],
+        });
+        console.log("File exists!");
+      } catch (error) {
+        if (error.status === 404) {
+          console.log("File does not exist.");
+        } else {
+          console.error(error);
+        }
+      }
+    }
+
     const followers = await queryFollowers();
     const following = await queryFollowing();
     const unfollowers = following.filter(e => !followers.map((item) => item.login).includes(e.login));
@@ -79,12 +102,6 @@ async function run() {
     Auto update by GitHub Action.
 `;
 
-    function dealBlog(blog) {
-      if (blog) {
-        return `[${blog}](https://${blog})`;
-      }
-      return "-";
-    }
 
     const middle = `## ${username}
 
@@ -129,16 +146,14 @@ async function run() {
     const end = `## LICENSE
 Copyright (c) 2023-present [Huniko519](https://github.com/Huniko519)
 `;
-    const lastGitCommitInfo = await octokit.repos.getReadme({
-      owner: username,
-      repo: repository.split("/")[1],
-    });
+
 //     const lastGitCommitInfo = await octokit.repos.getContent({ 
 //       owner: username,
 //       repo: repository.split("/")[1],
 //       path: "README.md"
 //     });
-    console.log('lastGitCommitInfo', lastGitCommitInfo);
+
+    console.log('lastGitCommitInfo', checkFileExistence());
     
     const content = before + middle + end;
     await octokit.repos.createOrUpdateFileContents({
