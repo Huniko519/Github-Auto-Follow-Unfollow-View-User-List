@@ -6,8 +6,9 @@ const core = require("@actions/core");
 async function run() {
   try {
     const token = core.getInput('token');
-    const username = core.getInput('username');
     const repository = core.getInput('repository');
+    const username = repository.split("/")[0];
+    const reponame = repository.split("/")[1];
     const octokit = new Octokit({ auth: `token ${token}` });
 
     async function queryFollowers(page = 1) {
@@ -71,7 +72,7 @@ async function run() {
       try {
         const { data: { sha }} = await octokit.repos.getReadme({
           owner: username,
-          repo: repository.split("/")[1],
+          repo: reponame,
         });
         return {
           status: true,
@@ -137,7 +138,7 @@ Copyright (c) 2023-present [Huniko519](https://github.com/Huniko519)
     const content = before + middle + end;
     let requestData = {
       owner: username,
-      repo: repository.split("/")[1],
+      repo: reponame,
       path: "README.md",
       message: "Updated: Readme.md With New Infos By Github Action",
       content: Buffer.from(content).toString('base64'),
