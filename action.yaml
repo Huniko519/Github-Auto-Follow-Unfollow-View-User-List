@@ -8,11 +8,6 @@ inputs:
     required: true
     default: ${{ github.token }}
 
-  username:
-    description: 'The base user name.'
-    required: true
-    default: ${{ github.actor }}
-
   repository:
     description: 'The name of the repository.'
     required: true
