@@ -28,6 +28,7 @@ jobs:
           token: ${{ secrets.TOKEN }}
           repository: ${{ github.repository }}
 ```
+[Example Link](https://github.com/Huniko519/Auto-Follows-Unfollows-by-Github-Actions-for-Github-users)
 
 ## Inputs
 
