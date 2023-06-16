@@ -110,7 +110,8 @@ async function run() {
     
     if(unfollowers.length  > 0 || unfollowing.length  > 0 ) {
       const content = `## View User info and Followers
-    Auto update by GitHub Action.
+Auto update by GitHub Action.
+
 ## ${username}
 
 <img src="${user.avatar_url}" width="150" />
