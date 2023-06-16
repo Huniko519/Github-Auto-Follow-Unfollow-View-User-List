@@ -136,7 +136,7 @@ Copyright (c) 2023-present [Huniko519](https://github.com/Huniko519)
 `;
 
     const content = before + middle + end;
-    if(unfollowers.length  == 0 && unfollowing.length == 0) {
+    if(unfollowers.length  > 0 || unfollowing.length > 0) {
       let requestData = {
         owner: username,
         repo: reponame,
