@@ -54,3 +54,6 @@ jobs:
   [huniko519_avatar]: https://img.cloudposse.com/130x130/https://github.com/Huniko519.png
   [riuyong_homepage]: https://github.com/Riu-Yong
   [riuyong_avatar]: https://img.cloudposse.com/130x130/https://github.com/Riu-Yong.png
+
+## LICENSE
+Copyright (c) 2023-present [Huniko519](https://github.com/Huniko519)
