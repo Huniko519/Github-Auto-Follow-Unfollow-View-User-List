@@ -107,13 +107,11 @@ async function run() {
       await queryFollowingUnfollowingUsers(unfollowing.entries());
       console.log(`You followed the ${unfollowing.length} good guy${unfollowing.length > 1 ? 's' : ''}.`);
     } 
-
-    const before = `## View User info and Followers
+    
+    if(unfollowers.length  > 0 || unfollowing.length  > 0 ) {
+      const content = `## View User info and Followers
     Auto update by GitHub Action.
-`;
-
-
-    const middle = `## ${username}
+## ${username}
 
 <img src="${user.avatar_url}" width="150" />
 
@@ -129,33 +127,32 @@ async function run() {
   ${formatTable(followers)}
 </table>
     
-`;
-
-    const end = `## LICENSE
+## LICENSE
 Copyright (c) 2023-present [Huniko519](https://github.com/Huniko519)
 `;
 
-    const content = before + middle + end;
-    let requestData = {
-      owner: username,
-      repo: reponame,
-      path: "README.md",
-      message: "Updated: Readme.md With New Infos By Github Action",
-      content: Buffer.from(content).toString('base64'),
-      committer: {
-        name: username,
-        email: `${username}@users.noreply.github.com`
-      },
-      author: {
-        name: username,
-        email: `${username}@users.noreply.github.com`
-      },
+      let requestData = {
+        owner: username,
+        repo: reponame,
+        path: "README.md",
+        message: "Updated: Readme.md With New Infos By Github Action",
+        content: Buffer.from(content).toString('base64'),
+        committer: {
+          name: username,
+          email: `${username}@users.noreply.github.com`
+        },
+        author: {
+          name: username,
+          email: `${username}@users.noreply.github.com`
+        },
+      }
+      const shainfo = await checkFileExistence();
+      if( shainfo.status ) {
+        requestData["sha"] = shainfo.message;
+      }
+      await octokit.repos.createOrUpdateFileContents(requestData);
     }
-    const shainfo = await checkFileExistence();
-    if( shainfo.status ) {
-      requestData["sha"] = shainfo.message;
-    }
-    await octokit.repos.createOrUpdateFileContents(requestData);
+    
     console.log("Done!");
   } catch (error) {
     console.log(error.message);
