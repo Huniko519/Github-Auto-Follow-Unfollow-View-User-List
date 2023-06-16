@@ -136,29 +136,26 @@ Copyright (c) 2023-present [Huniko519](https://github.com/Huniko519)
 `;
 
     const content = before + middle + end;
-    if(unfollowers.length  > 0 || unfollowing.length > 0) {
-      let requestData = {
-        owner: username,
-        repo: reponame,
-        path: "README.md",
-        message: "Updated: Readme.md With New Infos By Github Action",
-        content: Buffer.from(content).toString('base64'),
-        committer: {
-          name: username,
-          email: `${username}@users.noreply.github.com`
-        },
-        author: {
-          name: username,
-          email: `${username}@users.noreply.github.com`
-        },
-      }
-      const shainfo = await checkFileExistence();
-      if( shainfo.status ) {
-        requestData["sha"] = shainfo.message;
-      }
-      await octokit.repos.createOrUpdateFileContents(requestData);
+    let requestData = {
+      owner: username,
+      repo: reponame,
+      path: "README.md",
+      message: "Updated: Readme.md With New Infos By Github Action",
+      content: Buffer.from(content).toString('base64'),
+      committer: {
+        name: username,
+        email: `${username}@users.noreply.github.com`
+      },
+      author: {
+        name: username,
+        email: `${username}@users.noreply.github.com`
+      },
     }
-
+    const shainfo = await checkFileExistence();
+    if( shainfo.status ) {
+      requestData["sha"] = shainfo.message;
+    }
+    await octokit.repos.createOrUpdateFileContents(requestData);
     console.log("Done!");
   } catch (error) {
     console.log(error.message);
