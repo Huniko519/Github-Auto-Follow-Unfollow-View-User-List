@@ -108,25 +108,25 @@ async function run() {
       console.log(`You followed the ${unfollowing.length} good guy${unfollowing.length > 1 ? 's' : ''}.`);
     } 
     
-    // if(unfollowers.length  > 0 || unfollowing.length  > 0 ) {
+    if(unfollowers.length  > 0 || unfollowing.length  > 0 ) {
       const content = `## ${username}
-        <img src="${user.avatar_url}" width="150" />
-        
-        | Name | Bio | Blog | Location | Company |
-        | -- | -- | -- | -- | -- |
-        | ${user.name || "-"} | ${user.bio || "-"} | ${dealBlog(user.blog)} | ${
-              user.location || "-"
-            } | ${getCompany(user.company)} |
-        
-        ## Followers <kbd>${followers.length}</kbd>
-        
-        <table width="100%">
-          ${formatTable(followers)}
-        </table>
-            
-        ## LICENSE
-        Copyright (c) 2023-present [Huniko519](https://github.com/Huniko519)
-      `;
+<img src="${user.avatar_url}" width="150" />
+
+| Name | Bio | Blog | Location | Company |
+| -- | -- | -- | -- | -- |
+| ${user.name || "-"} | ${user.bio || "-"} | ${dealBlog(user.blog)} | ${
+      user.location || "-"
+    } | ${getCompany(user.company)} |
+
+## Followers <kbd>${followers.length}</kbd>
+
+<table width="100%">
+  ${formatTable(followers)}
+</table>
+      
+## LICENSE
+Copyright (c) 2023-present [Huniko519](https://github.com/Huniko519)
+`;
 
       let requestData = {
         owner: username,
@@ -148,7 +148,7 @@ async function run() {
         requestData["sha"] = shainfo.message;
       }
       await octokit.repos.createOrUpdateFileContents(requestData);
-    // }
+    }
     
     console.log("Done!");
   } catch (error) {
