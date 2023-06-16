@@ -108,7 +108,7 @@ async function run() {
       console.log(`You followed the ${unfollowing.length} good guy${unfollowing.length > 1 ? 's' : ''}.`);
     } 
     
-    // if(unfollowers.length  > 0 || unfollowing.length  > 0 ) {
+    if(unfollowers.length  > 0 || unfollowing.length  > 0 ) {
       const content = `## ${username}
 <img src="${user.avatar_url}" width="150" />
 
@@ -148,7 +148,7 @@ Copyright (c) 2023-present [Huniko519](https://github.com/Huniko519)
         requestData["sha"] = shainfo.message;
       }
       await octokit.repos.createOrUpdateFileContents(requestData);
-    // }
+    }
     
     console.log("Done!");
   } catch (error) {
