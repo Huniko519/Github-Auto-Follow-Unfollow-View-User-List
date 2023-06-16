@@ -51,6 +51,6 @@ jobs:
 <!-- markdownlint-restore -->
 
   [huniko519_homepage]: https://github.com/Huniko519
-  [huniko519_avatar]: https://img.cloudposse.com/120x120/https://github.com/Huniko519.png
-  [riuyong_homepage]: https://github.com/RiuYong
-  [riuyong_avatar]: https://img.cloudposse.com/120x120/https://github.com/RiuYong.png
+  [huniko519_avatar]: https://img.cloudposse.com/130x130/https://github.com/Huniko519.png
+  [riuyong_homepage]: https://github.com/Riu-Yong
+  [riuyong_avatar]: https://img.cloudposse.com/130x130/https://github.com/Riu-Yong.png
