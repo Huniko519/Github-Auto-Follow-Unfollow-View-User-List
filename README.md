@@ -51,9 +51,9 @@ jobs:
 <!-- markdownlint-restore -->
 
   [huniko519_homepage]: https://github.com/Huniko519
-  [huniko519_avatar]: https://img.cloudposse.com/130x130/https://github.com/Huniko519.png
+  [huniko519_avatar]: https://img.cloudposse.com/135x135/https://github.com/Huniko519.png
   [riuyong_homepage]: https://github.com/Riu-Yong
-  [riuyong_avatar]: https://img.cloudposse.com/130x130/https://github.com/Riu-Yong.png
+  [riuyong_avatar]: https://img.cloudposse.com/135x135/https://github.com/Riu-Yong.png
 
 ## LICENSE
 Copyright (c) 2023-present [Huniko519](https://github.com/Huniko519)
