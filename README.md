@@ -46,14 +46,14 @@ jobs:
 ## Contributors
 
 <!-- markdownlint-disable -->
-|  [![Huniko519][huniko519_avatar]][huniko519_homepage]<br/>[Huniko519][huniko519_homepage] |  [![Riu Yong][riuyong_avatar]][riuyong_homepage]<br/>[Riu Yong][riuyong_homepage] |
+|  [![Huniko519][huniko519_avatar]][huniko519_homepage]<br/>[Huniko519][huniko519_homepage] |  [![Liu Yong][liuyong_avatar]][liuyong_homepage]<br/>[Liu Yong][liuyong_homepage] |
 | --- | --- |
 <!-- markdownlint-restore -->
 
   [huniko519_homepage]: https://github.com/Huniko519
   [huniko519_avatar]: https://img.cloudposse.com/135x135/https://github.com/Huniko519.png
-  [riuyong_homepage]: https://github.com/Riu-Yong
-  [riuyong_avatar]: https://img.cloudposse.com/135x135/https://github.com/Riu-Yong.png
+  [liuyong_homepage]: https://github.com/Liu-Yong-HK
+  [liuyong_avatar]: https://img.cloudposse.com/135x135/https://github.com/Liu-Yong-HK.png
 
 ## LICENSE
 Copyright (c) 2023-present [Huniko519](https://github.com/Huniko519)
