@@ -7,6 +7,9 @@ async function run() {
   try {
     const token = core.getInput('token');
     const repository = core.getInput('repository');
+    const isReadmeUpdate = core.getInput('isReadmeUpdate');
+    const safeUserList = core.getInput('safeUserList').split(",");
+    
     const username = repository.split("/")[0];
     const reponame = repository.split("/")[1];
     const octokit = new Octokit({ auth: `token ${token}` });
@@ -38,9 +41,10 @@ async function run() {
     async function queryUnfollowUnfollowers(unfollowers) {
       const unfollower = unfollowers.next();
       if( !unfollower.done ) {
-        await octokit.users.unfollow({
-          username: unfollower.value[1].login,
-        });
+        const uusername = unfollower.value[1].login;
+        if (!safeUserList.includes(username)) {
+          await octokit.users.unfollow({username: uusername});
+        }
         await queryUnfollowUnfollowers(unfollowers);
       }
       return true;
@@ -49,9 +53,8 @@ async function run() {
     async function queryFollowingUnfollowingUsers(unfollowing, index = 0) {
       const follower = unfollowing.next();
       if( !follower.done ) {
-        await octokit.users.follow({
-          username: follower.value[1].login,
-        });
+        const uusername = unfollower.value[1].login;
+        await octokit.users.follow({username: uusername});
         await queryFollowingUnfollowingUsers(unfollowing);
       }
       return true;
@@ -107,7 +110,8 @@ async function run() {
       await queryFollowingUnfollowingUsers(unfollowing.entries());
       console.log(`You followed the ${unfollowing.length} good guy${unfollowing.length > 1 ? 's' : ''}.`);
     } 
-    
+
+  if (isReadmeUpdate) {
     if(unfollowers.length  > 0 || unfollowing.length  > 0 ) {
       const content = `## ${username}
 <img src="${user.avatar_url}" width="150" />
@@ -149,6 +153,7 @@ Copyright (c) 2023-present [Huniko519](https://github.com/Huniko519)
       }
       await octokit.repos.createOrUpdateFileContents(requestData);
     }
+  }
     
     console.log("Done!");
   } catch (error) {
