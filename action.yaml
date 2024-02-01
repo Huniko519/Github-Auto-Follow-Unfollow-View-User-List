@@ -13,6 +13,16 @@ inputs:
     required: true
     default: ${{ github.repository }}
     
+  isReadmeUpdate:
+    description: 'Readme update enable status.'
+    required: false
+    default: ${{ github.isReadmeUpdate }}
+    
+  safeUserList:
+    description: 'List of Safe Users.'
+    required: false
+    default: ${{ github.safeUserList }}
+    
 runs:
   using: 'node16'
   main: 'main.js'
