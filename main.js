@@ -98,8 +98,8 @@ async function run() {
 
     const followers = await queryFollowers();
     const following = await queryFollowing();
-    const unfollowers = following.filter(e => !followers.map((item) => item.login).includes(e.login));
-    const unfollowing = followers.filter(e => !following.map((item) => item.login).includes(e.login));
+    const unfollowers = following.filter(user => !followers.map(follower => follower.login).includes(user.login));
+    const unfollowing = followers.filter(user => !following.map(follow => follow.login).includes(user.login));
     followers.reverse();
 
     if(unfollowers.length  > 0) {
