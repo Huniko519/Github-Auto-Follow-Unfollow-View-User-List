@@ -45,7 +45,7 @@ jobs:
 
 - input:
   - `token`: [GitHub personal access token](https://github.com/settings/tokens/new) with at least **'read:user' and 'repo'** scope. _⚠️ You should store this token as [secret](#secrets)._ This input is required.
-  - `repository`: This is name of installed repository. This input is required.
+  - `repository`: This is the name of installed repository. This input is required.
 
 ## Contributors
 
