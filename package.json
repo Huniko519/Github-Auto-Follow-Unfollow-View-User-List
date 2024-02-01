@@ -22,8 +22,8 @@
   },
   "homepage": "https://github.com/Huniko519/Github-Auto-Follow-Unfollow-View-User-List#readme",
   "dependencies": {
-    "@actions/github": "^4.0.0",
-    "@octokit/rest": "^18.2.0",
-    "@actions/core": "^1.10.0"
+    "@actions/core": "^1.10.1",
+    "@actions/github": "^6.0.0",
+    "@octokit/rest": "^20.0.2"
   }
 }
