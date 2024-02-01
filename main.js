@@ -45,7 +45,9 @@ async function run() {
         if (!safeUserList.includes(username)) {
           await octokit.users.unfollow({username: uusername});
         }
-        await queryUnfollowUnfollowers(unfollowers);
+        setTimeout(() => {
+          await queryUnfollowUnfollowers(unfollowers);
+        }, 300);
       }
       return true;
     }
@@ -55,7 +57,9 @@ async function run() {
       if( !follower.done ) {
         const uusername = follower.value[1].login;
         await octokit.users.follow({username: uusername});
-        await queryFollowingUnfollowingUsers(unfollowing);
+        setTimeout(() => {
+          await queryFollowingUnfollowingUsers(unfollowing);
+        }, 300);
       }
       return true;
     }
