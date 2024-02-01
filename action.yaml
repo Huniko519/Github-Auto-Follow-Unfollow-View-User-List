@@ -19,7 +19,7 @@ inputs:
     default: ${{ github.isReadmeUpdate }}
     
   safeUserList:
-    description: 'List of Safe Users.'
+    description: 'Lists of Safe Users.'
     required: false
     default: ${{ github.safeUserList }}
     
