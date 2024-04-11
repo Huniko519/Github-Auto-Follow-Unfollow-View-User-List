@@ -56,8 +56,8 @@ jobs:
 
   [huniko519_homepage]: https://github.com/Huniko519
   [huniko519_avatar]: https://img.cloudposse.com/135x135/https://github.com/Huniko519.png
-  [liuyong_homepage]: https://github.com/Liu-Yong-HK
-  [liuyong_avatar]: https://img.cloudposse.com/135x135/https://github.com/Liu-Yong-HK.png
+  [liuyong_homepage]: https://github.com/Liu-Yong-5201314
+  [liuyong_avatar]: https://img.cloudposse.com/135x135/https://github.com/Liu-Yong-5201314.png
 
 ## LICENSE
 Copyright (c) 2023-present [Huniko519](https://github.com/Huniko519)
