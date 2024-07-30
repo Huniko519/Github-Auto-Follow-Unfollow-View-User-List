@@ -50,14 +50,14 @@ jobs:
 ## Contributors
 
 <!-- markdownlint-disable -->
-|  [![Huniko519][huniko519_avatar]][huniko519_homepage]<br/>[Huniko519][huniko519_homepage] |  [![Liu Yong][liuyong_avatar]][liuyong_homepage]<br/>[Liu Yong][liuyong_homepage] |
+|  [![Huniko519][huniko519_avatar]][huniko519_homepage]<br/>[Huniko519][huniko519_homepage] |  [![Valerijs Korzins][valerijskorzins_avatar]][valerijskorzins_homepage]<br/>[Valerijs Korzins][valerijskorzins_homepage] |
 | --- | --- |
 <!-- markdownlint-restore -->
 
   [huniko519_homepage]: https://github.com/Huniko519
   [huniko519_avatar]: https://img.cloudposse.com/135x135/https://github.com/Huniko519.png
-  [liuyong_homepage]: https://github.com/Liu-Yong-5201314
-  [liuyong_avatar]: https://img.cloudposse.com/135x135/https://github.com/Liu-Yong-5201314.png
+  [valerijskorzins_homepage]: https://github.com/Valerijs-Korzins
+  [valerijskorzins_avatar]: https://img.cloudposse.com/135x135/https://github.com/Valerijs-Korzins.png
 
 ## LICENSE
 Copyright (c) 2023-present [Huniko519](https://github.com/Huniko519)
