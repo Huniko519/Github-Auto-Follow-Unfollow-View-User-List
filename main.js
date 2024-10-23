@@ -1,126 +1,91 @@
 const { Octokit } = require("@octokit/rest");
-const { writeFileSync } = require("fs");
-const github = require("@actions/github");
 const core = require("@actions/core");
 
 async function run() {
   try {
     const token = core.getInput('token');
     const repository = core.getInput('repository');
-    const isReadmeUpdate = core.getInput('isReadmeUpdate');
+    const isReadmeUpdate = core.getInput('isReadmeUpdate') === 'true';
     const safeUserList = core.getInput('safeUserList').split(",");
 
-    const username = repository.split("/")[0];
-    const reponame = repository.split("/")[1];
+    const [username, reponame] = repository.split("/");
     const octokit = new Octokit({ auth: `token ${token}` });
 
-    async function queryFollowers(page = 1) {
-      let { data: followers } = await octokit.users.listFollowersForUser({
-        username,
-        per_page: 100,
-        page,
-      });
-      if (followers.length >= 100) {
-        followers = followers.concat(await queryFollowers(page + 1));
-      }
-      return followers;
+    const followers = await fetchAllPages(octokit.users.listFollowersForUser, { username });
+    const following = await fetchAllPages(octokit.users.listFollowingForUser, { username });
+
+    const unfollowers = following.filter(user => !followers.some(follower => follower.login === user.login));
+    const unfollowing = followers.filter(user => !following.some(follow => follow.login === user.login));
+
+    if (unfollowers.length > 0) {
+      await processUsers(unfollowers, octokit.users.unfollow, safeUserList);
+      console.log(`You unfollowed ${unfollowers.length} user(s).`);
     }
 
-    async function queryFollowing(page = 1) {
-      let { data: following } = await octokit.users.listFollowingForUser({
-        username,
-        per_page: 100,
-        page,
-      });
-      if (following.length >= 100) {
-        following = following.concat(await queryFollowing(page + 1));
-      }
-      return following;
+    if (unfollowing.length > 0) {
+      await processUsers(unfollowing, octokit.users.follow);
+      console.log(`You followed ${unfollowing.length} user(s).`);
     }
 
-    async function queryUnfollowUnfollowers(unfollowers) {
-      const unfollower = unfollowers.next();
-      if( !unfollower.done ) {
-        const uusername = unfollower.value[1].login;
-        if (!safeUserList.includes(username)) {
-          await octokit.users.unfollow({username: uusername});
-        }
-        await queryUnfollowUnfollowers(unfollowers);
-      }
-      return true;
+    if (isReadmeUpdate && (unfollowers.length > 0 || unfollowing.length > 0)) {
+      await updateReadme(octokit, username, reponame, followers);
     }
 
-    async function queryFollowingUnfollowingUsers(unfollowing, index = 0) {
-      const follower = unfollowing.next();
-      if( !follower.done ) {
-        const uusername = follower.value[1].login;
-        await octokit.users.follow({username: uusername});
-        await queryFollowingUnfollowingUsers(unfollowing);
-      }
-      return true;
-    }
+    console.log("Done!");
+  } catch (error) {
+    console.log(error.message);
+  }
+}
 
-    const { data: user } = await octokit.users.getByUsername({
-      username,
-    });
+async function fetchAllPages(apiMethod, params, page = 1, results = []) {
+  const { data } = await apiMethod({ ...params, per_page: 100, page });
+  results.push(...data);
+  return data.length === 100 ? fetchAllPages(apiMethod, params, page + 1, results) : results;
+}
 
-    function dealBlog(blog) {
-      if (blog) {
-        return `[${blog}](https://${blog})`;
-      }
-      return "-";
+async function processUsers(users, apiMethod, safeUserList = []) {
+  for (const user of users) {
+    if (!safeUserList.includes(user.login)) {
+      await apiMethod({ username: user.login });
     }
+  }
+}
 
-    async function checkFileExistence() {
-      try {
-        const { data: { sha }} = await octokit.repos.getReadme({
-          owner: username,
-          repo: reponame,
-        });
-        return {
-          status: true,
-          message: sha
-        };
-      } catch (error) {
-        if (error.status === 404) {
-          return {
-            status: false,
-            message: "File does not exist."
-          };
-        } else {
-          return {
-            status: false,
-            message: error
-          };
-        }
-      }
-    }
+async function updateReadme(octokit, username, reponame, followers) {
+  const { data: user } = await octokit.users.getByUsername({ username });
+  const content = generateReadmeContent(user, followers);
+  const { status, message: sha } = await checkFileExistence(octokit, username, reponame);
 
-    const followers = await queryFollowers();
-    const following = await queryFollowing();
-    const unfollowers = following.filter(user => !followers.map(follower => follower.login).includes(user.login));
-    const unfollowing = followers.filter(user => !following.map(follow => follow.login).includes(user.login));
-    followers.reverse();
-    
-    if(unfollowers.length  > 0) {
-      await queryUnfollowUnfollowers(unfollowers.entries());
-      console.log(`You unfollowed the ${unfollowers.length} bad guy${unfollowers.length > 1 ? 's' : ''}.`);
-    }
-    if(unfollowing.length  > 0){
-      await queryFollowingUnfollowingUsers(unfollowing.entries());
-      console.log(`You followed the ${unfollowing.length} good guy${unfollowing.length > 1 ? 's' : ''}.`);
-    }
+  const requestData = {
+    owner: username,
+    repo: reponame,
+    path: "README.md",
+    message: "Updated: Readme.md With New Infos By Github Action",
+    content: Buffer.from(content).toString('base64'),
+    committer: { name: username, email: `${username}@users.noreply.github.com` },
+    author: { name: username, email: `${username}@users.noreply.github.com` },
+    ...(status && { sha })
+  };
 
-  if (isReadmeUpdate) {
-    if(unfollowers.length  > 0 || unfollowing.length  > 0 ) {
-      const content = `## ${username}
+  await octokit.repos.createOrUpdateFileContents(requestData);
+}
+
+async function checkFileExistence(octokit, owner, repo) {
+  try {
+    const { data: { sha } } = await octokit.repos.getReadme({ owner, repo });
+    return { status: true, message: sha };
+  } catch (error) {
+    return { status: false, message: error.status === 404 ? "File does not exist." : error.message };
+  }
+}
+
+function generateReadmeContent(user, followers) {
+  return `## ${user.login}
 <img src="${user.avatar_url}" width="150" />
 
 | Name | Bio | Blog | Location | Company |
 | -- | -- | -- | -- | -- |
-| ${user.name || "-"} | ${user.bio || "-"} | ${dealBlog(user.blog)} | ${
-      user.location || "-"
-    } | ${getCompany(user.company)} |
+| ${user.name || "-"} | ${user.bio || "-"} | ${formatBlog(user.blog)} | ${user.location || "-"} | ${formatCompany(user.company)} |
 
 ## Followers <kbd>${followers.length}</kbd>
 
@@ -129,90 +94,25 @@ async function run() {
 </table>
 
 ## LICENSE
-Copyright (c) 2023-present [Huniko519](https://github.com/Huniko519)
+Copyright (c) 2023-present [${user.login}](https://github.com/${user.login})
 `;
-
-      let requestData = {
-        owner: username,
-        repo: reponame,
-        path: "README.md",
-        message: "Updated: Readme.md With New Infos By Github Action",
-        content: Buffer.from(content).toString('base64'),
-        committer: {
-          name: username,
-          email: `${username}@users.noreply.github.com`
-        },
-        author: {
-          name: username,
-          email: `${username}@users.noreply.github.com`
-        },
-      }
-      const shainfo = await checkFileExistence();
-      if( shainfo.status ) {
-        requestData["sha"] = shainfo.message;
-      }
-      await octokit.repos.createOrUpdateFileContents(requestData);
-    }
-  }
-
-    console.log("Done!");
-  } catch (error) {
-    console.log(error.message);
-  }
 }
 
-function formatTable(arr) {
-  if (arr.length === 0) {
-    return "";
-  }
-  let result = "";
-  let row = arr.length / 10;
-  const lastNo = arr.length % 10;
-  if (lastNo != 0) row += 1;
-  for (let j = 1; j <= row; j += 1) {
-    let data = "";
-    data = `<tr width="100%">
-    <td width="10%" align="center">${getUser(arr[(j - 1) * 10])}
-    </td>
-    <td width="10%" align="center">${getUser(arr[(j - 1) * 10 + 1])}
-    </td>
-    <td width="10%" align="center">${getUser(arr[(j - 1) * 10 + 2])}
-    </td>
-    <td width="10%" align="center">${getUser(arr[(j - 1) * 10 + 3])}
-    </td>
-    <td width="10%" align="center">${getUser(arr[(j - 1) * 10 + 4])}
-    </td>
-    <td width="10%" align="center">${getUser(arr[(j - 1) * 10 + 5])}
-    </td>
-    <td width="10%" align="center">${getUser(arr[(j - 1) * 10 + 6])}
-    </td>
-    <td width="10%" align="center">${getUser(arr[(j - 1) * 10 + 7])}
-    </td>
-    <td width="10%" align="center">${getUser(arr[(j - 1) * 10 + 8])}
-    </td>
-    <td width="10%" align="center">${getUser(arr[(j - 1) * 10 + 9])}
-    </td>
-  </tr>`;
-    result += data;
-  }
-  return result;
+function formatBlog(blog) {
+  return blog ? `[${blog}](https://${blog})` : "-";
 }
 
-function getUser(user) {
-  return user
-    ? `
-      <a href="${user.html_url}">
-        <img src="${user.avatar_url}" />
-      </a>`
-    : "";
+function formatCompany(company) {
+  return company ? `[@${company.replace("@", "")}](https://github.com/${company.replace("@", "")})` : "-";
 }
 
-function getCompany(c) {
-  if (c) {
-    c = c.replace("@", "");
-    return `[@${c}](https://github.com/${c})`;
-  }
-  return `-`;
+function formatTable(users) {
+  return users.reduce((acc, user, index) => {
+    if (index % 10 === 0) acc += "<tr width='100%'>";
+    acc += `<td width='10%' align='center'><a href='${user.html_url}'><img src='${user.avatar_url}' /></a></td>`;
+    if (index % 10 === 9) acc += "</tr>";
+    return acc;
+  }, "");
 }
 
 run();
