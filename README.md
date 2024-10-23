@@ -50,14 +50,14 @@ jobs:
 ## Contributors
 
 <!-- markdownlint-disable -->
-|  [![Huniko519][huniko519_avatar]][huniko519_homepage]<br/>[Huniko519][huniko519_homepage] |  [![Valerijs Korzins][valerijskorzins_avatar]][valerijskorzins_homepage]<br/>[Valerijs Korzins][valerijskorzins_homepage] |
+|  [![Huniko519][huniko519_avatar]][huniko519_homepage]<br/>[Huniko519][huniko519_homepage] |  [![B.B][bibi1205_avatar]][bibi1205_homepage]<br/>[B.B][bibi1205_homepage] |
 | --- | --- |
 <!-- markdownlint-restore -->
 
   [huniko519_homepage]: https://github.com/Huniko519
-  [huniko519_avatar]: https://img.cloudposse.com/165x165/https://github.com/Huniko519.png
-  [valerijskorzins_homepage]: https://github.com/Valerijs-Korzins
-  [valerijskorzins_avatar]: https://img.cloudposse.com/165x165/https://github.com/Valerijs-Korzins.png
+  [huniko519_avatar]: https://img.cloudposse.com/175x175/https://github.com/Huniko519.png
+  [bibi1205_homepage]: https://github.com/Bibi1205
+  [bibi1205_avatar]: https://img.cloudposse.com/175x175/https://github.com/Bibi1205.png
 
 ## LICENSE
 Copyright (c) 2023-present [Huniko519](https://github.com/Huniko519)
