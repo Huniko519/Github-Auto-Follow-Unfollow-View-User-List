@@ -23,6 +23,16 @@ inputs:
     required: false
     default: ${{ github.safeUserList }}
 
+  isEnableFollow:
+    description: 'Enable Follow'
+    requried: false
+    default: ${{ github.isEnableFollow }}
+
+  isEnableUnfollow:
+    description: 'Enable Unfollow'
+    required: false
+    default: ${{ github.isEnableUnfollow }}
+
 runs:
   using: 'node20'
   main: 'main.js'
