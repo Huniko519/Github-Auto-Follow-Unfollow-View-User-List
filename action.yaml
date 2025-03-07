@@ -26,12 +26,12 @@ inputs:
   isEnableFollow:
     description: 'Enable Follow'
     requried: false
-    default: ${{ github.isEnableFollow }}
+    default: true
 
   isEnableUnfollow:
     description: 'Enable Unfollow'
     required: false
-    default: ${{ github.isEnableUnfollow }}
+    default: true
 
 runs:
   using: 'node20'
