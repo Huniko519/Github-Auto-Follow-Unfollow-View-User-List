@@ -28,7 +28,9 @@ jobs:
           token: ${{ secrets.TOKEN }}
           repository: ${{ github.repository }}
           isReadmeUpdate: true
-          safeUserList: 'Liu-Yong-HK,Huniko-Team'
+          isEnableFollow: true
+          isEnableUnfollow: true
+          safeUserList: 'Babi1205,Huniko-Team'
 ```
 [Example Link](https://github.com/Huniko519/Auto-Follows-Unfollows-by-Github-Actions-for-Github-users)
 
@@ -36,9 +38,11 @@ jobs:
 
 | inputs                   | required | default               | description |
 |--------------------------|----------|-----------------------|-------------|
-| `token`           	     | true     | `${{ github.token }}` | The token used to authenticate. |
+| `token`           	   | true     | `${{ github.token }}` | The token used to authenticate. |
 | `repository`             | true     | `${{ github.repository }}` | The name of the repository. |
-| `isReadmeUpdate`         | false    | `${{ github.isReadmeUpdate }}` | Readme update enable status. |
+| `isReadmeUpdate`         | false    | `${{ github.isReadmeUpdate }}` | Readme update feature enable status. |
+| `isEnableFollow`         | false    | `${{ github.isEnableFollow }}` | Follow feature enable status. |
+| `isEnableUnfollow`       | false    | `${{ github.isEnableUnfollow }}` | Unfollow feature enable status. |
 | `safeUserList`           | false    | `${{ github.safeUserList }}` | Lists of Safe Users. |
 
 ## Input of this action
