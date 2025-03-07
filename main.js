@@ -6,6 +6,8 @@ async function run() {
     const token = core.getInput('token');
     const repository = core.getInput('repository');
     const isReadmeUpdate = core.getInput('isReadmeUpdate') === 'true';
+    const isEnableFollow = core.getInput('isEnableFollow') === 'true';
+    const isEnableUnfollow = core.getInput('isEnableUnfollow') === 'true';
     const safeUserList = core.getInput('safeUserList').split(",");
 
     const [username, reponame] = repository.split("/");
@@ -17,17 +19,17 @@ async function run() {
     const unfollowers = following.filter(user => !followers.some(follower => follower.login === user.login));
     const unfollowing = followers.filter(user => !following.some(follow => follow.login === user.login));
 
-    if (unfollowers.length > 0) {
+    if (isEnableUnfollow && unfollowers.length > 0) {
       await processUsers(unfollowers, octokit.users.unfollow, safeUserList);
       console.log(`You unfollowed ${unfollowers.length} user(s).`);
     }
 
-    if (unfollowing.length > 0) {
+    if (isEnableFollow && unfollowing.length > 0) {
       await processUsers(unfollowing, octokit.users.follow);
       console.log(`You followed ${unfollowing.length} user(s).`);
     }
 
-    if (isReadmeUpdate && (unfollowers.length > 0 || unfollowing.length > 0)) {
+    if (isReadmeUpdate && (isEnableFollow || isEnableUnfollow) && (unfollowers.length > 0 || unfollowing.length > 0)) {
       await updateReadme(octokit, username, reponame, followers);
     }
 
